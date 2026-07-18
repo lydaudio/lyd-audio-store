@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"><style>
+:root{--bg:#0c0d0a;--panel:#171813;--panel-hi:#1e2019;--tan:#cbb98a;--cream:#e9ddc2;--red:#b0392c;--red-glow:#ff5a3d;--line:rgba(255,255,255,.06)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:'Oswald',sans-serif;color:var(--cream)}
+.mono{font-family:'Space Mono',monospace}
+.page{max-width:980px;margin:0 auto;padding:28px 32px 90px}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
+.brandmark{display:flex;align-items:center;gap:10px}
+.brand-dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--red-glow),var(--red) 60%,#5c1a12);box-shadow:0 0 10px 1px rgba(255,90,61,.5)}
+.steps{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;color:var(--tan);opacity:.6}
+.step{padding:5px 10px;border-radius:12px;background:var(--panel)}
+.step.active{background:linear-gradient(180deg,var(--red),#7c2419);color:#f6e6d8;opacity:1}
+.steps .sep{opacity:.4}
+
+.title{font-size:32px;font-weight:700;color:var(--cream);margin:0 0 6px}
+.subtitle{font-size:13.5px;color:var(--tan);opacity:.75;margin:0 0 36px}
+
+.layout{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:start}
+.panel{background:linear-gradient(180deg,var(--panel-hi),var(--panel));border:1px solid var(--line);border-radius:12px;padding:26px 28px;box-shadow:0 20px 40px rgba(0,0,0,.35)}
+.panel + .panel{margin-top:20px}
+.panel-title{font-size:12px;letter-spacing:.16em;color:var(--tan);opacity:.7;margin-bottom:18px}
+
+.lineitem{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.lineitem:last-of-type{border-bottom:none}
+.li-thumb{width:44px;height:44px;border-radius:6px;background:#0a0a08;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.li-dot{width:8px;height:8px;border-radius:50%;background:var(--red-glow);box-shadow:0 0 8px 1px rgba(255,90,61,.5)}
+.li-info{flex:1;min-width:0}
+.li-name{font-size:14.5px;font-weight:600;color:var(--cream)}
+.li-meta{font-size:11px;color:var(--tan);opacity:.6}
+.li-price{font-size:14px;font-weight:700;color:var(--red-glow);font-family:'Space Mono',monospace}
+.li-remove{font-size:10.5px;color:var(--tan);opacity:.5;text-decoration:underline;cursor:pointer;margin-left:12px}
+
+.promo{display:flex;gap:8px;margin:20px 0}
+.promo input{flex:1;padding:11px 14px;border-radius:6px;background:#12130f;border:1px solid var(--line);color:var(--cream);font-family:'Oswald',sans-serif;font-size:13px}
+.promo input::placeholder{color:var(--tan);opacity:.5}
+.promo-btn{padding:11px 18px;border-radius:6px;background:var(--panel);border:1px solid var(--line);color:var(--tan);font-size:11px;letter-spacing:.08em;font-weight:600;cursor:pointer;white-space:nowrap}
+
+.totals{margin-top:6px}
+.totalrow{display:flex;justify-content:space-between;font-size:13px;color:var(--tan);opacity:.8;padding:6px 0}
+.totalrow.grand{border-top:1px solid var(--line);margin-top:8px;padding-top:14px;font-size:18px;font-weight:700;color:var(--cream);opacity:1}
+.totalrow.grand .amt{color:var(--red-glow);font-family:'Space Mono',monospace}
+
+.field{margin-bottom:14px}
+.field label{display:block;font-size:10.5px;letter-spacing:.1em;color:var(--tan);opacity:.7;margin-bottom:6px}
+.field input{width:100%;padding:12px 14px;border-radius:6px;background:#12130f;border:1px solid var(--line);color:var(--cream);font-family:'Space Mono',monospace;font-size:13.5px}
+.field input::placeholder{color:var(--tan);opacity:.4}
+.row2{display:flex;gap:12px}
+.row2 .field{flex:1}
+.cardbrands{display:flex;gap:6px;margin-top:6px}
+.cardchip{font-size:9px;letter-spacing:.06em;color:var(--tan);opacity:.6;padding:3px 7px;border-radius:4px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+
+.paybtn{width:100%;padding:15px 0;border-radius:7px;background:linear-gradient(180deg,var(--red),#7c2419);color:#f6e6d8;font-size:14px;letter-spacing:.12em;font-weight:700;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(176,57,44,.4);margin-top:8px}
+.paybtn:hover{background:linear-gradient(180deg,#c1432f,#8a2b1d)}
+.securenote{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:14px;font-size:10.5px;color:var(--tan);opacity:.5}
+.lockdot{width:6px;height:6px;border-radius:50%;background:#6fbf73}
+
+.instantnote{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:12px;line-height:1.6;color:var(--tan);opacity:.8;margin-top:20px}
+
+@media(max-width:800px){.layout{grid-template-columns:1fr}}
+</style></helmet>
+<div class="page">
+
+<div class="nav"><div class="brandmark"><div class="brand-dot"></div><div style="font-size:13px;letter-spacing:.2em;font-weight:600;color:var(--tan)">LUA AUDIO</div></div><div class="steps"><div class="step">CART</div><div class="sep">→</div><div class="step active">CHECKOUT</div><div class="sep">→</div><div class="step">CONFIRMED</div></div></div>
+
+<div class="title">Checkout</div>
+<div class="subtitle">Digital delivery — download links and license keys are emailed the moment payment clears.</div>
+
+<div class="layout">
+
+<div class="panel">
+<div class="panel-title">ORDER SUMMARY · 3 ITEMS</div>
+
+<div class="lineitem"><div class="li-thumb"><div class="li-dot"></div></div><div class="li-info"><div class="li-name">All 6 Effects Bundle</div><div class="li-meta">Saturator · 3-Band EQ · 5-Band EQ · Compressor · Delay · Reverb</div></div><div class="li-price">$5.00</div><div class="li-remove" role="button" tabindex="0" aria-label="Remove All 6 Effects Bundle">remove</div></div>
+<div class="lineitem"><div class="li-thumb"><div class="li-dot"></div></div><div class="li-info"><div class="li-name">Jules</div><div class="li-meta">Amp / mic-pair emulator</div></div><div class="li-price">$1.00</div><div class="li-remove" role="button" tabindex="0" aria-label="Remove Jules">remove</div></div>
+<div class="lineitem"><div class="li-thumb"><div class="li-dot" style="background:#b98aff;box-shadow:0 0 8px 1px rgba(123,79,209,.5)"></div></div><div class="li-info"><div class="li-name">Drift</div><div class="li-meta">Analog-style poly synth</div></div><div class="li-price">$1.00</div><div class="li-remove" role="button" tabindex="0" aria-label="Remove Drift">remove</div></div>
+
+<div class="promo"><input type="text" placeholder="Promo code" aria-label="Promo code"/><div class="promo-btn" role="button" tabindex="0" aria-label="Apply promo code">APPLY</div></div>
+
+<div class="totals">
+<div class="totalrow"><div>Subtotal</div><div class="mono">$7.00</div></div>
+<div class="totalrow"><div>Tax</div><div class="mono">calculated at payment</div></div>
+<div class="totalrow grand"><div>Total due today</div><div class="amt">$7.00</div></div>
+</div>
+
+<div class="instantnote">Every purchase includes lifetime updates for that plugin/instrument and unlimited re-downloads from your Lua Audio account. No subscription, ever.</div>
+</div>
+
+<div class="panel">
+<div class="panel-title">PAYMENT DETAILS</div>
+
+<div class="field"><label for="checkout-email">EMAIL</label><input id="checkout-email" type="email" placeholder="you@example.com"/></div>
+<div class="field"><label for="checkout-name">NAME ON CARD</label><input id="checkout-name" type="text" placeholder="Full name"/></div>
+<div class="field"><label for="checkout-card">CARD NUMBER</label><input id="checkout-card" type="text" placeholder="•••• •••• •••• ••••"/><div class="cardbrands"><div class="cardchip">VISA</div><div class="cardchip">MASTERCARD</div><div class="cardchip">AMEX</div></div></div>
+<div class="row2">
+<div class="field"><label for="checkout-expiry">EXPIRY</label><input id="checkout-expiry" type="text" placeholder="MM / YY"/></div>
+<div class="field"><label for="checkout-cvc">CVC</label><input id="checkout-cvc" type="text" placeholder="•••"/></div>
+</div>
+<div class="field"><label for="checkout-country">COUNTRY</label><input id="checkout-country" type="text" placeholder="United States"/></div>
+
+<div class="paybtn" role="button" tabindex="0" aria-label="Pay $7.00">PAY $7.00</div>
+<div class="securenote"><div class="lockdot"></div>Payments are processed securely — card details never touch our servers.</div>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic{
+  renderVals(){
+    return {};
+  }
+}
+</script>
+</body>
+</html>
