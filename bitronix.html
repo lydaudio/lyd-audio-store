@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>lyd audio</title>
+<title>Bitronix &mdash; lyd audio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Tomorrow:wght@400;600;700&family=Syne+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
+<style>:root{--accent:#2bacb3;--accent-dim:#1b6f74}</style>
 </head>
 <body>
 <div class="wrap">
@@ -20,26 +21,33 @@
   <div class="banner-tag">UNDER CONSTRUCTION</div>
   <p>Still building the site. Nothing to buy or download yet.</p>
 </div>
-
-<div class="hero center">
-  <h1 class="h1">Plugins that show their work.</h1>
-  <p class="sub">Yours once you have it. No subscription. Nothing phones home.</p>
+<div class="hero">
+  <p class="eyebrow">BX-1 . 004432</p>
+  <h1 class="h1">Bitronix</h1>
+  <p class="tagline">Break a signal four ways and watch it happen.</p>
+  <div class="status">NOT YET AVAILABLE</div>
   <div class="trust mono">Windows VST3 + standalone. No license key, no activation, no account.</div>
+  <div class="tagrow"><div class="tag">BITCRUSH</div><div class="tag">DOWNSAMPLE</div><div class="tag">WAVEFOLD</div><div class="tag">NOISE</div></div>
 </div>
 
-<video class="heroloop" autoplay muted loop playsinline preload="metadata"
-       poster="video/spectrum-loop-poster.jpg"
-       aria-label="Bitronix's spectrum display, rotating">
-  <source src="video/spectrum-loop.webm" type="video/webm">
-  <source src="video/spectrum-loop.mp4" type="video/mp4">
-</video>
-<img class="heroloop-still" src="video/spectrum-loop-poster.jpg"
-     alt="Bitronix's spectrum display">
+<img class="panelshot" src="panels/Bitronix.png" alt="The Bitronix panel" width="808">
 
-<div style="text-align:center;margin-bottom:56px">
-  <a class="linkbtn" href="plugins.html" style="display:inline-block;padding:13px 38px">SEE THE PLUGINS</a>
+<p class="blurb">A bit crusher from 32 bits down to 2, a downsampler up to 50x, a sine wavefolder and four kinds of digital noise. Then a speaker sim and a width control to put the wreckage where you want it.</p>
+
+<div class="points">
+  <div class="point"><h3>One CRT screen, three views</h3><p>Switch between an oscilloscope, a vectorscope and a 3D spectrum. Folding adds lobes on the scope and loops on the vectorscope, so you can see what you are doing.</p></div>
+  <div class="point"><h3>A sine fold, not a triangle fold</h3><p>A triangle fold has a sharp corner at every fold point, and every corner makes aliasing. A sine has none, and it gets antialiasing on top. Measured 7 dB cleaner than a plain fold.</p></div>
+  <div class="point"><h3>Exactly bypassed at zero</h3><p>Fold at 0, mix at 0, and what comes out is bit-for-bit what went in.</p></div>
 </div>
 
+<div class="spectable">
+  <div class="spec"><div class="speck">BIT DEPTH</div><div class="specv">2 &ndash; 32 bits</div></div>
+  <div class="spec"><div class="speck">DOWNSAMPLE</div><div class="specv">1 &ndash; 50x</div></div>
+  <div class="spec"><div class="speck">FOLD</div><div class="specv">0 &ndash; 10, with bias</div></div>
+  <div class="spec"><div class="speck">NOISE</div><div class="specv">4 types</div></div>
+  <div class="spec"><div class="speck">PANEL</div><div class="specv">808 x 472</div></div>
+  <div class="spec"><div class="speck">FORMAT</div><div class="specv">VST3 / Standalone</div></div>
+</div>
 <div class="foot">
   <div class="social">
     <a href="about.html#contact" aria-label="Email lyd audio" title="Email">
@@ -61,7 +69,7 @@
       </svg>
     </a>
   </div>
-  <div class="mono">lyd audio</div>
+  <div class="mono">BX-1 . 004432</div>
 </div>
 </div>
 </body>

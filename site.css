@@ -1,0 +1,254 @@
+/* ===========================================================================
+   site.css - one stylesheet for the whole lyd audio store.
+
+   Every page links this and nothing else. Before the site was split into
+   pages each file carried its own near-identical copy of these rules, which
+   is the same duplication trap the plugin panels were in: the copies drift,
+   and nothing tells you which one is right.
+
+   A PRODUCT PAGE SETS ITS OWN ACCENT and changes nothing else:
+
+       <link rel="stylesheet" href="site.css">
+       <style>:root{--accent:#a06cf0;--accent-dim:#5f3d94}</style>
+
+   That is the only per-page style block any page should have.
+   =========================================================================== */
+
+:root{
+  --bg:#0c0d0f; --panel:#151719; --panel-hi:#1c1f22;
+  --line:rgba(255,255,255,.09);
+  --cream:#e9e4da; --tan:#b9b2a5;
+  --accent:#e9e4da; --accent-dim:#8a8478;   /* section pages stay neutral */
+
+  /* The mono face carries the prices, the model numbers and the spec values.
+     Declared once here because it was five separate copies of the same family
+     string before, and copies drift.
+     Fallbacks matter: a font-family naming a face the machine does not have
+     silently substitutes something PROPORTIONAL, and the first thing you
+     notice is a column that stops lining up. */
+  --mono:'Syne Mono','Space Mono',ui-monospace,SFMono-Regular,Consolas,monospace;
+
+  /* SYNE MONO SHIPS ONE WEIGHT (400). See the bold rule further down - this
+     is the knob for how heavy the prices sit. */
+  --mono-bold-stroke:0.4px;
+
+  /* The HERO face - the product name and the line under it, nothing else.
+     Tomorrow is squarish and angular, which is the same vocabulary as the
+     CRT spectrum on the home page and as Syne Mono's flat sides under it.
+     It has REAL weights, so unlike the mono it needs no synthesis trickery.
+     Section headings, card titles and the nav deliberately stay on Oswald:
+     the hero is the one place a display face earns its keep, and putting it
+     everywhere would leave the page with no quiet type at all. */
+  --display:'Tomorrow','Oswald',sans-serif;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:'Oswald',sans-serif;
+     -webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* ------------------------------------------------------------------ chrome */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0;
+     border-bottom:1px solid var(--line)}
+.logo{font-size:19px;font-weight:600;letter-spacing:.20em}
+.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:26px;font-size:13px;letter-spacing:.13em;color:var(--tan)}
+.navlinks a:hover{color:var(--cream)}
+.navlinks a.here{color:var(--cream)}
+.foot{border-top:1px solid var(--line);margin-top:70px;padding:26px 0 44px;color:var(--tan);
+      font-size:12px;letter-spacing:.06em;display:flex;justify-content:space-between;
+      align-items:center;flex-wrap:wrap;gap:12px}
+/* The emblems are INLINE SVG rather than an icon font or three <img>s: they
+   inherit currentColor so they hover with the rest of the footer, they cost
+   no extra request, and they cannot end up as three broken boxes if a file
+   is renamed.
+
+   --social-size is the dial. A literal fifth of the original 18px is 3.6px,
+   which is thinner than the strokes themselves - the envelope flap and the
+   Instagram lens collapse into a smudge, and it is far under a tappable
+   target on a phone. 12px is about the floor where all three still read as
+   what they are. The LINK keeps a 24px hit area whatever the glyph does, so
+   shrinking the icon never shrinks the thing you have to hit. */
+.social{display:flex;gap:14px}
+.social a{--social-size:15px;
+          color:var(--tan);display:inline-flex;align-items:center;justify-content:center;
+          /* The hit box is deliberately bigger than the glyph, so the ROW is
+             taller than the mono line beside it. .foot centres its two
+             children on each other rather than top-aligning them, which is
+             what keeps the emblems on the same optical line as the text. */
+          min-width:24px;min-height:24px;transition:color .15s ease}
+.social a:hover{color:var(--cream)}
+.social svg{width:var(--social-size);height:var(--social-size);display:block}
+
+.eyebrow{font-size:11px;letter-spacing:.30em;color:var(--accent);font-weight:600;margin:0 0 14px}
+.trust{font-size:11px;letter-spacing:.10em;color:var(--tan);margin:0 0 4px;opacity:.85}
+.panelshot{width:100%;height:auto;display:block;border-radius:10px;
+           box-shadow:0 22px 54px rgba(0,0,0,.62),0 0 0 1px rgba(255,255,255,.06)}
+
+/* -------------------------------------------------------------------- hero */
+.hero{padding:52px 0 30px}
+.hero.center{text-align:center;padding:58px 0 34px}
+.h1{font-size:52px;font-weight:700;letter-spacing:.01em;margin:0 0 10px;line-height:1.05;
+     font-family:var(--display)}
+.hero.center .h1{font-size:56px;margin-bottom:14px}
+.tagline{font-size:18px;color:var(--tan);margin:0 0 26px;max-width:640px;line-height:1.5;
+         font-family:var(--display)}
+.sub{font-size:18px;color:var(--tan);max-width:620px;margin:0 auto 30px;line-height:1.55;
+     font-family:var(--display)}
+
+/* ------------------------------------------------------------- hero loop */
+/* The home page's rotating spectrum. The video's own background is baked to
+   --bg, so there is no panel edge to hide and no alpha channel to depend on -
+   transparent video would need VP9 for Chrome and HEVC for Safari and falls
+   back to a black box everywhere else. If --bg changes, re-render the loop
+   (tools/render-spectrum-loop.cpp), do not try to mask it here. */
+.heroloop{width:100%;height:auto;display:block;margin:0 auto 34px}
+
+/* An autoplaying loop is motion nobody asked for. Anyone who has asked their
+   system for less of it gets the poster frame instead - same picture, still. */
+@media (prefers-reduced-motion: reduce){
+  .heroloop{display:none}
+  .heroloop-still{display:block !important}
+}
+.heroloop-still{display:none;width:100%;height:auto;margin:0 auto 34px}
+
+/* --------------------------------------------------------- product cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;
+      margin-bottom:60px}
+.card{background:linear-gradient(180deg,var(--panel-hi),var(--panel));border:1px solid var(--line);
+      border-radius:12px;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 26px 50px rgba(0,0,0,.5)}
+.shot{width:100%;height:186px;display:block;object-fit:contain;padding:12px;
+      border-bottom:1px solid var(--line);background:#0a0b0c}
+.cardbody{padding:20px 22px 24px}
+.cardhead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.cardtitle{font-size:21px;font-weight:700}
+.carddesc{font-size:13.5px;line-height:1.55;color:var(--tan);margin-bottom:14px;min-height:44px}
+
+/* ----------------------------------------------------------------- buttons */
+/* THERE IS NO STORE, so there is no store CSS. .buyrow / .price / .buy and
+   the whole .bundle block were deleted rather than left sitting unused -
+   dead rules are how a stylesheet starts disagreeing with the pages it
+   dresses. Restoring them is `git show` on the commit that removed them.
+
+   What survives is .linkbtn, which is a plain navigation button: it is what
+   the home page's SEE THE PLUGINS is and what each card's VIEW is. It was
+   called .buybtn while it also served the cart. */
+.linkbtn{display:block;text-align:center;border:1px solid var(--line);border-radius:7px;
+         padding:11px;font-size:12px;letter-spacing:.16em;color:var(--cream);cursor:pointer}
+.linkbtn:hover{background:rgba(255,255,255,.05)}
+
+/* The line that replaces the price and the ADD TO CART button on a product
+   page. It is deliberately the same weight as a price was - the question a
+   visitor came with is "can I get this", and the answer has to be as easy to
+   find as the answer used to be. */
+.status{display:inline-block;font-family:var(--mono);font-size:15px;letter-spacing:.10em;
+        color:var(--accent);border:1px solid var(--accent-dim);border-radius:7px;
+        padding:11px 20px;margin-bottom:34px}
+
+/* ------------------------------------------------------------ product body */
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+.tag{font-size:10px;letter-spacing:.16em;color:var(--tan);border:1px solid var(--line);
+     border-radius:4px;padding:5px 10px}
+.blurb{font-size:16px;line-height:1.65;color:var(--tan);max-width:720px;margin:34px 0 46px}
+/* About is an eyebrow and two short paragraphs, nothing else - the hero's own
+   padding is the space above them, so they do not add their own on top. */
+.hero .blurb{margin:0}
+.hero .blurb + .blurb{margin-top:18px}
+.points{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:26px;
+        margin-bottom:50px}
+.point h3{font-size:15px;letter-spacing:.06em;margin:0 0 8px;color:var(--cream)}
+.point p{font-size:13.5px;line-height:1.6;color:var(--tan);margin:0}
+.spectable{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+           background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.spec{background:var(--panel);padding:15px 17px}
+.speck{font-size:10px;letter-spacing:.18em;color:var(--tan);opacity:.75;margin-bottom:5px}
+.specv{font-size:14px;color:var(--cream);font-family:var(--mono)}
+
+/* -------------------------------------------------------------- prose bits */
+/* .prose went with the About page's sections - About is one paragraph now and
+   it uses .blurb, which every product page already did. Nothing else on the
+   site had multi-heading prose in it. */
+.note{border:1px dashed var(--line);border-radius:12px;padding:24px 28px;margin-bottom:40px;
+      max-width:720px}
+.note h3{margin:0 0 10px;font-size:15px;letter-spacing:.06em}
+.note p{margin:0;color:var(--tan);font-size:13.5px;line-height:1.65}
+
+/* ------------------------------------------------------- the mono "bold" */
+/* Syne Mono has exactly ONE weight. Asking for 700 therefore does not select
+   a bolder cut - the browser SYNTHESISES one by smearing the 400 outline, and
+   on a face with this much curve that reads as blurry and unevenly thick,
+   worst on the elements that most want to look solid.
+
+   So synthesis is switched off and the weight is added back as an even
+   stroke instead. --mono-bold-stroke is the dial: 0 is the font exactly as
+   drawn, 0.4px is a light bold, 0.9px is about as far as it goes before it
+   turns back into a blob. currentColor keeps each one its own accent.
+
+   If the face is ever swapped for one with real weights, delete this whole
+   block and put font-weight:700 back on the two rules below. */
+.status,.banner-tag{
+  font-synthesis-weight:none; font-synthesis:none;
+  -webkit-text-stroke:var(--mono-bold-stroke) currentColor;
+}
+
+/* -------------------------------------------------------------------- form */
+/* The contact form on the About page. Fields borrow the card's surface so the
+   form reads as part of the panel furniture rather than as browser default
+   widgets dropped on a dark page - which is what an unstyled input on this
+   background looks like, a white box with black text. */
+.sectionhead{font-size:22px;letter-spacing:.02em;margin:34px 0 6px}
+.formnote{font-size:14px;color:var(--tan);margin:0 0 26px}
+.form{max-width:560px;margin:0 0 20px}
+.field{margin-bottom:18px}
+.form label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+            color:var(--tan);margin:0 0 7px}
+.form input,.form select,.form textarea{
+  width:100%;background:var(--panel);color:var(--cream);
+  border:1px solid var(--line);border-radius:7px;padding:11px 13px;
+  font-family:'Oswald',sans-serif;font-size:14px}
+.form textarea{min-height:132px;line-height:1.55;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus{
+  outline:none;border-color:var(--accent-dim)}
+.form button{background:none;color:var(--cream);border:1px solid var(--line);border-radius:7px;
+             padding:12px 32px;font-family:'Oswald',sans-serif;font-size:12px;
+             letter-spacing:.16em;cursor:pointer}
+.form button:hover{background:rgba(255,255,255,.05)}
+/* The spam trap. It must be reachable by a bot parsing the HTML and invisible
+   to a person, so it is hidden rather than removed. */
+.hp{display:none}
+
+/* ------------------------------------------------- the under-construction band */
+/* On EVERY page, directly under the nav, because the one thing a visitor must
+   not have to work out for themselves is whether this is a shop. It says so
+   before the hero does anything clever.
+
+   TO TAKE THE SITE LIVE: delete the .banner block from each of the six pages
+   (`grep -rn 'class="banner"' assets/*.html`), delete this rule, and delete
+   the .status line from each product page. Nothing else on the site is
+   construction-specific. */
+.banner{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+        border:1px dashed var(--line);border-radius:10px;
+        padding:13px 18px;margin:22px 0 0;
+        background:rgba(255,255,255,.02)}
+.banner-tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--accent);
+            white-space:nowrap}
+.banner p{margin:0;font-size:13px;line-height:1.5;color:var(--tan)}
+
+/* ------------------------------------------------------------------ mobile */
+@media(max-width:760px){
+  /* THE NAV USED TO BE display:none HERE. That left a phone with no way to
+     reach PLUGINS or CONTACT from a product page - the logo went home and
+     that was the only route anywhere. Instagram traffic is phone traffic, so
+     the one audience most likely to arrive on a product page was the one
+     that could not get off it. It wraps onto its own line under the
+     wordmark instead, which costs 30 px and nothing else. */
+  .nav{flex-wrap:wrap;gap:6px}
+  .navlinks{width:100%;gap:24px;font-size:12px}
+  /* The links are 17 px of text. On a phone that is a tap target you miss,
+     and the row has its own line now, so the height is free. */
+  .navlinks a{padding:9px 0}
+  .h1,.hero.center .h1{font-size:36px}
+}
