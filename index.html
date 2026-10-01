@@ -3,17 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; media-src 'self'; form-action https://formsubmit.co; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="noindex">
 <title>lyd audio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Tomorrow:wght@400;600;700&family=Syne+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="/site.css">
 </head>
 <body>
 <div class="wrap">
 <div class="nav">
-  <a class="logo" href="index.html"><span>lyd</span> audio</a>
-  <div class="navlinks"><a href="plugins.html">PLUGINS</a><a href="about.html">ABOUT</a><a href="about.html#contact">CONTACT</a></div>
+  <a class="logo" href="/"><span>lyd</span> audio</a>
+  <div class="navlinks"><a href="/plugins/">PLUGINS</a><a href="/about/">ABOUT</a><a href="/about/#contact">CONTACT</a></div>
 </div>
 
 <div class="banner">
@@ -30,32 +32,32 @@
 <video class="heroloop" autoplay muted loop playsinline preload="metadata"
        poster="video/spectrum-loop-poster.jpg"
        aria-label="Bitronix's spectrum display, rotating">
-  <source src="video/spectrum-loop.webm" type="video/webm">
-  <source src="video/spectrum-loop.mp4" type="video/mp4">
+  <source src="/video/spectrum-loop.webm" type="video/webm">
+  <source src="/video/spectrum-loop.mp4" type="video/mp4">
 </video>
-<img class="heroloop-still" src="video/spectrum-loop-poster.jpg"
+<img height="720" width="1280" class="heroloop-still" src="/video/spectrum-loop-poster.jpg"
      alt="Bitronix's spectrum display">
 
 <div style="text-align:center;margin-bottom:56px">
-  <a class="linkbtn" href="plugins.html" style="display:inline-block;padding:13px 38px">SEE THE PLUGINS</a>
+  <a class="linkbtn" href="/plugins/" style="display:inline-block;padding:13px 38px">SEE THE PLUGINS</a>
 </div>
 
 <div class="foot">
   <div class="social">
-    <a href="about.html#contact" aria-label="Email lyd audio" title="Email">
+    <a href="/about/#contact" aria-label="Email lyd audio" title="Email">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.2 7.2l8.8 6 8.8-6"/>
       </svg>
     </a>
-    <a href="#" aria-label="lyd audio on Instagram" title="Instagram">
+    <a href="#" rel="noopener noreferrer" aria-label="lyd audio on Instagram" title="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/>
         <circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/>
       </svg>
     </a>
-    <a href="#" aria-label="lyd audio on LinkedIn" title="LinkedIn">
+    <a href="#" rel="noopener noreferrer" aria-label="lyd audio on LinkedIn" title="LinkedIn">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3.2 9.1h3.6V21H3.2zM9.3 9.1h3.45v1.63h.05c.48-.91 1.66-1.87 3.42-1.87 3.66 0 4.33 2.4 4.33 5.53V21h-3.6v-5.68c0-1.35-.02-3.09-1.88-3.09-1.89 0-2.17 1.47-2.17 2.99V21H9.3z"/>
       </svg>
